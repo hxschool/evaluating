@@ -47,7 +47,7 @@ public class AutoSetUserAdapterFilter implements Filter {
 		Object sessionid = session.getAttribute(LOGIN_SESSION_ID);
 		Object accessid = session.getAttribute(LOGIN_ACCESS);
 		if(sessionid!=null&&accessid!=null) {
-			return;
+			filterChain.doFilter(request, response);
 		}
 
 		//判断当前用户是否合法,合法直接放行
