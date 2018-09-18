@@ -12,3 +12,10 @@
 3.配置WEB-INF目录中的dbconfig.properties文件（需要配置服务器上的数据库信息）
 
 
+创建数据库
+CREATE DATABASE IF NOT EXISTS evaluating DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+grant all privileges on evaluating.* to evaluating@localhost identified by 'evaluating123';
+grant all privileges on evaluating.* to evaluating@'%' identified by 'evaluating123';
+grant create routine on evaluating.* to evaluating@'%';
+grant alter  routine on evaluating.* to evaluating@'%';
+grant execute on evaluating.* to evaluating@'%';
