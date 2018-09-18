@@ -138,6 +138,27 @@
 		<url-pattern>*.jsp</url-pattern>
 	</filter-mapping> 
   
+   <servlet>
+    <description>ProServlet</description>
+    <display-name>ProServlet</display-name>
+    <servlet-name>ProServlet</servlet-name>
+    <servlet-class>com.greathiit.evaluating.servlet.ProServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProServlet</servlet-name>
+    <url-pattern>/ProServlet</url-pattern>
+  </servlet-mapping>
+
+	<servlet>
+		<description>Pro</description>
+		<display-name>Pro</display-name>
+		<servlet-name>Pro</servlet-name>
+		<servlet-class>com.greathiit.evaluating.servlet.Pro</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Pro</servlet-name>
+		<url-pattern>/Pro</url-pattern>
+	</servlet-mapping>
   
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
