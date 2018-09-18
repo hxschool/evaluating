@@ -43,9 +43,6 @@ public class ConnUtils {
 	 * @throws SQLException
 	 */
 	public static Connection getConnection() throws SQLException {
-		if(conn!=null) {
-			return conn;
-		}
 		conn = DriverManager.getConnection(url, username, password);
 		return conn;
 	}

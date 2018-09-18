@@ -92,9 +92,10 @@ public class ProServlet extends HttpServlet {
 				List<Student> list = baseResponse.getResult();
 				pr.setTotal(list.size());
 				int k = 1;
-				Sql_op op = new Sql_op();
+				
 				SimpleDateFormat SimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				for(Student student : list) {
+					Sql_op op = new Sql_op();
 					ResultSet rs = op.find("student", "count(*) as cnt", "user_number='"+student.getStudentNumber()+"'");
 					if(rs.next()) {
 						int count = rs.getInt("cnt");
@@ -132,8 +133,9 @@ public class ProServlet extends HttpServlet {
 					pr.setSuccess(k);
 					request.getSession().setAttribute("pr", pr);
 					k++;
+					op.close();
 				}
-				op.close();
+				
 			}
 		} catch (Exception e1) {
 			e1.printStackTrace();
