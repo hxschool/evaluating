@@ -30,12 +30,9 @@ public class ConnUtils {
 		PRIVATEKEY = PropertiesUtils.getPropertyValue("evaluating.privateKey");
 		try {
 			Class.forName(driver);
-			conn = DriverManager.getConnection(url, username, password);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		} 
 	}
 
 	/**
@@ -46,6 +43,10 @@ public class ConnUtils {
 	 * @throws SQLException
 	 */
 	public static Connection getConnection() throws SQLException {
+		if(conn!=null) {
+			return conn;
+		}
+		conn = DriverManager.getConnection(url, username, password);
 		return conn;
 	}
 
