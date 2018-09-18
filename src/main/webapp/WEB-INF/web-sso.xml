@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="schedule-console" version="3.0">
+  <display-name></display-name>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>FileUploadServlet</servlet-name>
+    <servlet-class>com.greathiit.evaluating.dao.FileUploadServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FileUploadServlet</servlet-name>
+    <url-pattern>/FileUploadServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>FileSystem</servlet-name>
+    <servlet-class>com.greathiit.evaluating.dBassiant.FileSystem</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FileSystem</servlet-name>
+    <url-pattern>/FileSystem</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>ExcelUpDate</servlet-name>
+    <servlet-class>com.greathiit.evaluating.dao.ExcelUpDate</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ExcelUpDate</servlet-name>
+    <url-pattern>/ExcelUpDate</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>HL</servlet-name>
+    <servlet-class>com.greathiit.evaluating.dao.UpXml</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HL</servlet-name>
+    <url-pattern>/manager_web/HL</url-pattern>
+  </servlet-mapping>
+  
+    <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>saveXml</servlet-name>
+    <servlet-class>com.greathiit.evaluating.servlet.SaveXmlUrl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>saveXml</servlet-name>
+    <url-pattern>/saveXml</url-pattern>
+  </servlet-mapping>
+  
+  <listener>
+		<listener-class>org.jasig.cas.client.session.SingleSignOutHttpSessionListener</listener-class>
+  </listener>
+	
+  <filter>
+		<filter-name>CAS Single Sign Out Filter</filter-name>
+		<filter-class>org.jasig.cas.client.session.SingleSignOutFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>CAS Single Sign Out Filter</filter-name>
+		<url-pattern>*</url-pattern>
+	</filter-mapping>
+
+	
+	<filter>
+		<filter-name>CAS HttpServletRequest Wrapper Filter</filter-name>
+		<filter-class>org.jasig.cas.client.util.HttpServletRequestWrapperFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>CAS HttpServletRequest Wrapper Filter</filter-name>
+		<url-pattern>*</url-pattern>
+	</filter-mapping>
+	
+	<!-- 登录认证，未登录用户导向CAS Server进行认证 -->
+	<filter>
+		<filter-name>CAS Filter</filter-name>
+		<filter-class>org.jasig.cas.client.filter.AuthenticationFilter</filter-class>
+		<init-param>
+			<param-name>casServerLoginUrl</param-name>
+			<param-value>http://wangwei.com:8080/cas/login</param-value>
+		</init-param>
+		 <init-param>  
+        <param-name>excludePaths</param-name>  
+        	<param-value>.*[/,\\]admin[/,\\].*||.*login.jsp</param-value>  
+    	</init-param>
+		<init-param>
+			<param-name>serverName</param-name>
+			<param-value>http://lab.wangwei.com:8080</param-value>
+			<!--请相关为相关项目的名次,本示例为考试系统-->
+		</init-param>		
+	</filter>
+	<filter-mapping>
+		<filter-name>CAS Filter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>CAS Validation Filter</filter-name>
+		<filter-class>org.jasig.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter</filter-class>
+		<init-param>
+			<param-name>casServerUrlPrefix</param-name>
+			<param-value>http://wangwei.com:8080/cas</param-value>
+		</init-param>
+		
+		<init-param>
+			<param-name>serverName</param-name>
+			<param-value>http://lab.wangwei.com:8080</param-value>
+		</init-param>
+		<init-param>
+			<param-name>useSession</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>redirectAfterValidation</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CAS Validation Filter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+
+
+	
+
+	<filter>
+	<filter-name>AutoSetUserAdapterFilter</filter-name>
+	<filter-class>org.jasig.cas.client.filter.AutoSetUserAdapterFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>AutoSetUserAdapterFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping> 
+  
+  
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <servlet-mapping>
+     <servlet-name>default</servlet-name>
+     <url-pattern>*.png</url-pattern>
+     </servlet-mapping>
+  <servlet-mapping>
+     <servlet-name>default</servlet-name>
+     <url-pattern>*.css</url-pattern>
+     </servlet-mapping>
+ 
+<servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.gif</url-pattern>
+
+ </servlet-mapping>
+    
+ <servlet-mapping>
+     <servlet-name>default</servlet-name>
+     <url-pattern>*.jpg</url-pattern>
+ </servlet-mapping>
+    
+ <servlet-mapping>
+     <servlet-name>default</servlet-name>
+     <url-pattern>*.js</url-pattern>
+ </servlet-mapping>
+</web-app>
