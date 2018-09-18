@@ -100,6 +100,7 @@ public class ProServlet extends HttpServlet {
 					if(rs.next()) {
 						int count = rs.getInt("cnt");
 						if(count>0) {
+							op.close();
 							continue;
 						}else {
 							Map<String,String> data = new HashMap<String,String>();
