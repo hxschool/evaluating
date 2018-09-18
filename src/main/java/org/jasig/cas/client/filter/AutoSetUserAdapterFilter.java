@@ -72,6 +72,7 @@ public class AutoSetUserAdapterFilter implements Filter {
 		
 		try {
 			for (int a = 0; a < tables.length; a++) {
+				logger.info("查询用户...当前操作表:"+tables[a]);
 				resultFlag += dao.getStudents_check("select count(*) from " + tables[a] + " where user_number='" + username + "'");
 				if (tables[a].equals("manager_form") && !Arrays.asList(roleIds).contains("99")) {
 					if (resultFlag == 0) {
@@ -91,7 +92,9 @@ public class AutoSetUserAdapterFilter implements Filter {
 						resultFlag = 1;
 					}
 				}
+				logger.info("查询用户...当前登录用户:"+username);
 				if (resultFlag == 1) {
+					logger.info("开始复制~"+username);
 					session.setAttribute("nowusername", username);
 					session.setAttribute("table", tables[a]);
 					dao.setTable(tables[a]);
@@ -101,7 +104,9 @@ public class AutoSetUserAdapterFilter implements Filter {
 					break;
 				}
 			}
+			logger.info("应该跳转相关操作页面");
 		} catch (SQLException e) {
+			logger.info("系统异常,操作数据库失败");
 			e.printStackTrace();
 		}
 		
