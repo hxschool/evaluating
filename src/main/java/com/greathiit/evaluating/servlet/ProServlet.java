@@ -35,6 +35,7 @@ import com.greathiit.evaluating.servlet.vo.Student;
  */
 
 public class ProServlet extends HttpServlet {
+	
 	private static RestTemplate restTemplate = new RestTemplate();
     private static final long serialVersionUID = 1L;
     public static Map<String,Major> majors = new HashMap<String,Major>();
@@ -64,6 +65,7 @@ public class ProServlet extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	System.out.println("准备开始处理数据...");
         response.setContentType("text/text;charset=utf-8");
         response.setCharacterEncoding("UTF-8");
     	Progress pr = new Progress();
@@ -72,6 +74,7 @@ public class ProServlet extends HttpServlet {
     	String tradeJson = new Gson().toJson(resultMap);
 		Map<String, String> requestMap;
 		try {
+			System.out.println("数据加密准备中...");
 			requestMap = SecureUtil.encryptTradeInfo(ConnUtils.APPID, tradeJson, ConnUtils.PRIVATEKEY,
 					ConnUtils.SYSTEM_PUBLICKEY);
 			HttpHeaders headers = new HttpHeaders();
@@ -79,7 +82,7 @@ public class ProServlet extends HttpServlet {
 			headers.setContentType(type);
 			headers.add("Accept", MediaType.APPLICATION_JSON.toString());
 	        HttpEntity<String> formEntity = new HttpEntity<String>(new Gson().toJson(requestMap), headers);
-			
+	        System.out.println("准备数据请求...");
 			ResponseEntity<String> responseEntity = restTemplate.postForEntity(ConnUtils.SYSTEM_URL.concat("api/getStudents"), formEntity, String.class);
 			Gson gson = new Gson();
 			Type listType = new TypeToken<BaseResponse<List<Student>>>() {}.getType();
