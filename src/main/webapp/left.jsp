@@ -165,7 +165,7 @@ H1 a {
         <div><img src="images/menu_topline.gif" width="182" height="5" /></div>
         <ul class="MM" style="background:#999">
                   <li><a href="manager_web/excelToSql.jsp" target="main">系统配置</a></li>
-                  <li><a href="pull.jsp" target="main">同步数据</a></li>
+                  <li><a href="pull.jsp" >同步数据</a></li>
                 </ul>
       </div>
    <%
