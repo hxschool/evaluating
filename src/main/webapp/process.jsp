@@ -38,7 +38,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		if(nowpage==null)
 			nowpage="1";
 	}
-		
+
 	Mysql_operation mysq_op=new Mysql_operation ();
 	
 	Items temp=new Items();
@@ -68,12 +68,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    tempQ.setFiled_name("user_number");
 			    int fill_accessS=Integer.parseInt(tempQ.getFieldValue("now_role",students[za]));
 			    //获取学生所属上级的角色等级
-			    if(fill_accessB==fill_accessS)//判断 当前用户是否有 修改学生信息的权利
+			    //if(fill_accessB==fill_accessS)//判断 当前用户是否有 修改学生信息的权利
 			    {
 			   		// 上级有 权限修改 一
 			   		tempQ.setTable("student_basic_news");
 			    	tempQ.setFiled_name("user_number");
-			    	if(!tempQ.getFieldValue("examine",students[za]).equals("0"))//判断用户是否填写
+			    	//if(!tempQ.getFieldValue("examine",students[za]).equals("0"))//判断用户是否填写
 			    	{
 				   		mysq_op.setTable("student_basic_news");
 						mysq_op.alter_value("examine='2'", "where user_number='"+students[za]+"'");//修改 填写表的状态
@@ -90,31 +90,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		else
 		{
-			System.out.println("审核通过");
+			
 			for(int za=0;za<students.length;za++)
 			{
 				Items tempQ=new Items();
 			    tempQ.setTable("manager_form");
 			    tempQ.setFiled_name("user_number");
 			    int fill_accessB=Integer.parseInt(tempQ.getFieldValue("role",(String)session.getAttribute("nowusername")));
-			    
 			    tempQ.setTable("student");
 			    tempQ.setFiled_name("user_number");
 			    int fill_accessS=Integer.parseInt(tempQ.getFieldValue("now_role",students[za]));
-			    
-			    if(fill_accessB==fill_accessS)
+			  	
+			    //if(fill_accessB==fill_accessS)
 			    {
 			   		// 上级有 权限修改 一审核通过
 			   		tempQ.setTable("student_basic_news");
 			    	tempQ.setFiled_name("user_number");
-			    	if(!tempQ.getFieldValue("examine",students[za]).equals("0"))//判断用户是否填写
+			    	
+			    	
+			    	//if(!tempQ.getFieldValue("examine",students[za]).equals("0"))//判断用户是否填写
 			    	{
 				   		mysq_op.setTable("student_basic_news");
 						mysq_op.alter_value("examine='1'", "where user_number='"+students[za]+"'");//修改 填写表的状态
 						
 						mysq_op.setTable("student");
 				    	mysq_op.alter_value("now_role='"+Stu_role+"'", "where user_number='"+students[za]+"'");//审核通过的 将当前角色等级改为上一级的角色等级
-				    	
 					}	
 			    }			
 			}

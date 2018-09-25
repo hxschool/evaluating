@@ -107,7 +107,6 @@ public class Mysql_operation {// 添加一个数据库 初始化
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("333333333333333333");
 			return 0;
 		}
 

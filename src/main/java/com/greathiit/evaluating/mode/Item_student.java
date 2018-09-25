@@ -6,7 +6,7 @@ public class Item_student {
 	private String student_number;
 	
 	private String student_name;
-	
+	private String student_major;
 	private String student_class;
 	
 	private String student_age_class;
@@ -18,6 +18,14 @@ public class Item_student {
 	private int examin;
 	
 	private Date time;
+
+	public String getStudent_major() {
+		return student_major;
+	}
+
+	public void setStudent_major(String student_major) {
+		this.student_major = student_major;
+	}
 
 	public int getExamin() {
 		return examin;

@@ -8,7 +8,7 @@ System.out.println("登录页！！");
 <html>
   <head>
   
-    <title>thinks 测评系统登录</title>
+    <title>哈尔滨信息工程学院-综合素质测评系统 BATE 1.0.0</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    

@@ -19,14 +19,15 @@ public class Submit_news_to_database {
 		ResultSet rs=null;
 		try {
 			conn = db.getConnetion();
-			String sql="Select * From "+table+" Where user_number="+aStudent+" ;";
-
+			String sql="Select * From "+table+" Where user_number="+aStudent;
+			System.out.println(sql);
 			stmt=conn.prepareStatement(sql);
 			rs=stmt.executeQuery();
 			
 			
 			for(int a=0;a<names.size();a++)//遍历 传入的 键值对
 			{
+				System.out.println(names.get(a));
 				String temp=names.get(a).toLowerCase();
 				int c=0;
 				//System.out.print("\n"+"键值对位置："+a+"          ");

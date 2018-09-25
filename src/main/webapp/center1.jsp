@@ -138,8 +138,8 @@ $(function(){
 		<tr>
 			<td valign="top">
 				<form name="form1" action="center1.jsp" method="post">
-				    <div id="classify"><a href="javascript:showTable()">分类筛选</a><div style="margin:0px; padding: 0px; float:right; margin-right: 10px"> 未提交：<span class="red">22</span> | 已审核：11 | 未审核：45</div></div>
-				    <table id="selsecId"  style="display:none; margin-left: 20px;" cellspacing="0" width="100%" style="border:1px  solid #DCEAF7; border-bottom:0px; background:#E9F2FB;">
+				    <div id="classify"><a href="javascript:showTable()">分类筛选</a><div style="margin:0px; padding: 0px; float:right; margin-right: 10px"> <!-- 未提交：<span class="red">22</span> | 已审核：11 | 未审核：45 --></div></div>
+				    <table id="selsecId"   width="100%" style="border:1px  solid #DCEAF7; border-bottom:0px; background:#E9F2FB;">
 				        <tr>
 				            <td width="250px" align="left">
 				                专业：<select name='student_major' onchange='window.location="#"+this.value'>
@@ -216,7 +216,7 @@ $(function(){
 								<th width="8%">总分</th>
 								<th width="115px">状态</th>
 								<th width="150px">提交时间</th>
-								<th width="120px">操作</th>
+								<th width="200px">操作</th>
 							</tr>
 							<%--读取学生记录，并显示//////////////////////////////////// --%>
 							<%
@@ -243,7 +243,7 @@ $(function(){
 										Items temp = new Items();
 										temp.setTable("student");
 										temp.setFiled_name("user_number");
-										//System.out.println("测试："+temp.getFieldValue("now_role","201321091074")+"over");
+									
 										staff = Integer.parseInt(temp.getFieldValue("now_role",
 												student.getStudent_number()));
 

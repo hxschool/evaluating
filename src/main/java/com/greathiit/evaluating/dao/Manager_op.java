@@ -534,18 +534,4 @@ public class Manager_op {
 		
 		
 	}
-	
-	public static void main(String aggs[]){
-		 Manager_op mop=new Manager_op();
-		 mop.getStudentLimt("manager_form", "user_number", "123456");
-		 ArrayList<String> a=null;
-		 a=mop.getSelectValues("123456", "student_major");
-		 
-		 for(int b=0;b<a.size();b++)
-		 {
-			 //System.out.println(a.get(b));
-		 }
-
-	 }
-
 }

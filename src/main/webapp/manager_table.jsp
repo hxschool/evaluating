@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*,com.greathiit.evaluating.dao.Items,com.greathiit.evaluating.mode.Item_student" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -8,7 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     
-    <title>My JSP 'index.jsp' starting page</title>
+    <title>哈尔滨信息工程学院-综合素质测评系统 BATE 1.0.0</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -151,6 +151,8 @@ function closeButtonM()
 		
 		String student_number=request.getParameter("student_number");
 		session.setAttribute("student_number",student_number );
+
+		
 		//如果传入student_number参数为空，返回
 
 		
@@ -160,7 +162,8 @@ function closeButtonM()
 			{	
 				reforw=1;
 			};
-		
+			Items item = new Items();
+			Item_student Item_student = item.getStudentByStudentNumber(student_number);
 		
 	 %>
 	<div id='message1_content'>
@@ -181,19 +184,36 @@ function closeButtonM()
   	<table style=" color: white; ">
 		<tbody>
 			<tr>
-				<td>姓名：</td><td>何雷</td>
+				<td>姓名：</td><td><%=Item_student.getStudent_name() %></td>
 				<td class="ceelSpace" style="width: 30px; ">&nbsp;</td>       
 				<td>学号:</td>
-				<td>201321091074</td>   
+				<td><%=student_number %></td>   
 				<td class="ceelSpace" style="width: 30px;">&nbsp;</td>   
 				<td>专业：</td>       
-				<td>计科</td>   
+				<td><%=Item_student.getStudent_major() %></td>   
 				<td class="ceelSpace" style=" width: 30px; ">&nbsp;</td>       
 				<td>班级：</td>       
-				<td>1302</td>
+				<td><%=Item_student.getStudent_class()%></td>
 				<td class="ceelSpace" style="width: 30px; ">&nbsp;</td>
 				<td>状态：</td>
-				<td>已通过</td>     
+				<td>
+					<%
+					switch (Item_student.getExamin()) {
+					case 0:
+						out.println("未填写");
+						break;
+					case 1:
+						out.println("已提交");
+						break;
+					case 2:
+						out.println("退审");
+						break;
+						default:
+							out.println("未填写");
+							break;
+					}
+					%>
+				</td>     
 			</tr>   
 		</tbody>
 	</table> 
