@@ -90,17 +90,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		else
 		{
-			
+
 			for(int za=0;za<students.length;za++)
 			{
+				String user_number = students[za];
+
 				Items tempQ=new Items();
 			    tempQ.setTable("manager_form");
 			    tempQ.setFiled_name("user_number");
 			    int fill_accessB=Integer.parseInt(tempQ.getFieldValue("role",(String)session.getAttribute("nowusername")));
 			    tempQ.setTable("student");
 			    tempQ.setFiled_name("user_number");
-			    int fill_accessS=Integer.parseInt(tempQ.getFieldValue("now_role",students[za]));
-			  	
+			    int fill_accessS=Integer.parseInt(tempQ.getFieldValue("now_role",user_number));
+			    System.out.println("------------------------>"+user_number);
 			    //if(fill_accessB==fill_accessS)
 			    {
 			   		// 上级有 权限修改 一审核通过
@@ -108,13 +110,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    	tempQ.setFiled_name("user_number");
 			    	
 			    	
+			    	
 			    	//if(!tempQ.getFieldValue("examine",students[za]).equals("0"))//判断用户是否填写
 			    	{
+			    		System.out.println("===========================计算总分");
+				    	
 				   		mysq_op.setTable("student_basic_news");
-						mysq_op.alter_value("examine='1'", "where user_number='"+students[za]+"'");//修改 填写表的状态
+						mysq_op.alter_value("examine='1'", "where user_number='"+user_number+"'");//修改 填写表的状态
 						
 						mysq_op.setTable("student");
-				    	mysq_op.alter_value("now_role='"+Stu_role+"'", "where user_number='"+students[za]+"'");//审核通过的 将当前角色等级改为上一级的角色等级
+				    	mysq_op.alter_value("now_role='"+Stu_role+"'", "where user_number='"+user_number+"'");//审核通过的 将当前角色等级改为上一级的角色等级
+				    	
 					}	
 			    }			
 			}

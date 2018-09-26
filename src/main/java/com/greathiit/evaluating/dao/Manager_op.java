@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -267,7 +268,6 @@ public class Manager_op {
 			stmt=conn.prepareStatement("select * from "+table+" where user_number=\""+studentNumber+"\" ;");
 			rs=stmt.executeQuery();
 			
-			
 			while(rs.next())
 			{
 				for(int b=1;b<=rs.getMetaData().getColumnCount();b++)//和数据库的字段比较，看是否存在
@@ -284,7 +284,6 @@ public class Manager_op {
 			}	
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		finally
@@ -323,7 +322,7 @@ public class Manager_op {
 		
 	}
 	
-	public boolean creatUser(Map newUser)// 传入字段键值对，创建一条新的记录 插入数据库
+	public boolean creatUser(Map newUser)
 	{
 
 		String key="";
@@ -372,19 +371,18 @@ public class Manager_op {
 	{
 		ArrayList<String> selectV= new ArrayList<String>();
 		
-		DBHelper db=new DBHelper();
+		DBHelper db = new DBHelper();
 		Connection conn = null;
-		PreparedStatement stmt=null;
-		ResultSet rs=null;
+		Statement stmt = null;
+		ResultSet rs = null;
 		
 		String sql="select "+fieled+" from manager_form where user_number="+manager+";";
 		
-		////System.out.print("sql");
 
 		try {
 			conn = db.getConnetion();
-			stmt=conn.prepareStatement(sql);
-			rs=stmt.executeQuery();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
 
 			while(rs.next())
 			{
@@ -393,12 +391,9 @@ public class Manager_op {
 				{
 					Manager_op mp=new Manager_op();
 					String limit=mp.getStudentLimt("manager_form", "user_number", manager);
-					////System.out.println(limit);
-					////System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx哟西："+limit);
 					sql="select distinct "+fieled+" from student where id=id "+limit+";";
-					////System.out.println(sql);
-					stmt=conn.prepareStatement(sql);
-					rs=stmt.executeQuery();
+
+					rs = stmt.executeQuery(sql);
 					while(rs.next())
 					{
 						selectV.add(rs.getString(fieled));

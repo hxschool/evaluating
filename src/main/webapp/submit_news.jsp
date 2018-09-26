@@ -16,7 +16,7 @@
 	}
 
 	String student = (String) session.getAttribute("nowusername");
-	String student2 = (String) session.getAttribute("student_number");
+	String oper_student = (String) session.getAttribute("student_number");
 	if (student == null) {
 		out.println("<p>请重新登陆！3秒后自动跳转...</p>");
 %>
@@ -38,13 +38,6 @@
 			}
 		} else {
 			
-			if(null!=request.getParameter("user_number")&&!"".equals(request.getParameter("user_number"))){
-				student2 = request.getParameter("user_number");
-				Items item = new Items();
-				Item_student Item_student = item.getStudentByStudentNumber(student2);
-				student = Item_student.getStudent_name();
-			}
-			
 			Items temp = new Items();
 			temp.setTable("manager_form");
 			temp.setFiled_name("user_number");
@@ -65,12 +58,12 @@
 
 	ArrayList<String> names = new ArrayList<String>();
 	ArrayList<String> values = new ArrayList<String>();
-
+	
+	
 	while (pNames.hasMoreElements()) {
 		String name = (String) pNames.nextElement();
-
+		
 		if (!name.toLowerCase().equals("scoretitle"))
-			;
 		{
 			String valueList[] = request.getParameterValues(name);
 			String value = valueList[0];
@@ -82,7 +75,6 @@
 			names.add(name);
 			values.add(value);
 		}
-
 	}
 
 	//计算分数 初始化
@@ -93,9 +85,9 @@
 	Submit_news_to_database sub_to_db = new Submit_news_to_database();
 	String mode_name = request.getParameter("scoretitle");
 	Manager_op mop = new Manager_op(); // 用于总分的计算
-
+	
 	int rs = 0;
-	if (student2 == null) {
+	if (oper_student == null) {
 
 		com.setStudent(student);
 
@@ -110,7 +102,6 @@
 			values2.add(String.valueOf(mark));
 
 			int rs2 = sub_to_db.write_news(student, names2, values2, "student_basic_news");
-			System.out.println("总分：" + values2.get(0));
 			int rs3 = sub_to_db.write_news(student, names2, values2, "student_marks");//将模块分数 数据写入 student_marks
 
 			if (rs3 == 1) {
@@ -129,11 +120,10 @@
 		}
 
 	} else {
+		com.setStudent(oper_student);
 
-		com.setStudent(student2);
-
-		rs = sub_to_db.write_news(student2, names, values, "student_basic_news");
-
+		rs = sub_to_db.write_news(oper_student, names, values, "student_basic_news");
+		
 		if (rs == 1) {
 			double mark = com.docompute(mode_name);
 
@@ -142,17 +132,17 @@
 			names2.add(mode_name);
 			values2.add(String.valueOf(mark));
 
-			int rs2 = sub_to_db.write_news(student2, names2, values2, "student_basic_news");
-
-			int rs3 = sub_to_db.write_news(student2, names2, values2, "student_marks");//将模块分数 数据写入 student_marks
+			int rs2 = sub_to_db.write_news(oper_student, names2, values2, "student_basic_news");
+	
+			int rs3 = sub_to_db.write_news(oper_student, names2, values2, "student_marks");//将模块分数 数据写入 student_marks
 
 			if (rs3 == 1) {
-				double sum_mark = mop.calculateSumMark("student_marks", student2);
+				double sum_mark = mop.calculateSumMark("student_marks", oper_student);
 				ArrayList<String> names3 = new ArrayList<String>();
 				ArrayList<String> values3 = new ArrayList<String>();
 				names3.add("student_sum_mark");
 				values3.add(String.valueOf(sum_mark));
-				sub_to_db.write_news(student2, names3, values3, "student_basic_news");// 写如总分 */
+				sub_to_db.write_news(oper_student, names3, values3, "student_basic_news");// 写如总分 */
 
 				names3 = null;
 				values3 = null;
