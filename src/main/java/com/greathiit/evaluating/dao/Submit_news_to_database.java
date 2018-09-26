@@ -29,7 +29,6 @@ public class Submit_news_to_database {
 				{
 					String temp=names.get(a).toLowerCase();
 					int c=0;
-					//System.out.print("\n"+"键值对位置："+a+"          ");
 					for(int b=1;b<=rs.getMetaData().getColumnCount();b++)//和数据库的字段比较，看是否存在
 					{
 						boolean flag=(boolean)(rs.getMetaData().getColumnName(b).equalsIgnoreCase(temp));
@@ -45,14 +44,12 @@ public class Submit_news_to_database {
 									
 					}
 					
-					System.out.print("\n");
 					if(c==0)//不存在时
 					{
 						sql="alter table "+table+" add "+temp+" varchar(250)";
 						stmt.executeUpdate(sql);
 						sql="update student_basic_news set "+temp+"=\""+values.get(a)+"\" where user_number="+aStudent+" ;";
 						stmt.executeUpdate(sql);
-						System.out.print("修改成功2！！");
 					}
 				}
 				return 1;

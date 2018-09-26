@@ -104,7 +104,7 @@ public class Manager_op {
 		ResultSet rs=null;
 		
 		String sql="select * from student as a,student_basic_news as b where a.user_number=b.user_number "+limit+limit2+" ;";
-		////System.out.print(sql);
+
 
 		try {
 			conn = db.getConnetion();
@@ -120,11 +120,6 @@ public class Manager_op {
 				item.setStudent_name(rs.getString("user_name"));
 				item.setStudent_class(rs.getString("student_class"));
 				item.setStudent_age_class(rs.getString("student_age_class"));
-				DateFormat format2= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				
-//				Date date=null;
-//				String timeStamp=rs.getString("registration_time");
-//				timeStamp=timeStamp.replace(".0", "");
 				item.setTime(rs.getTimestamp("time"));
 				item.setStudent_sum_mark(rs.getInt("student_sum_mark"));
 				item.setExamin(rs.getInt("examine"));
@@ -192,7 +187,7 @@ public class Manager_op {
 		ResultSet rs=null;
 		
 		String sql="select count(*) from student where user_number="+user_number2+" "+limit+" ;";
-		////System.out.print("sql");
+		
 
 		try {
 			conn = db.getConnetion();
@@ -345,7 +340,7 @@ public class Manager_op {
 	    }
 		 
 		String sql="insert into manager_form ("+key+") values("+values+") ;";
-		////System.out.println(sql);
+
 		
 		Mysql_operation mop= new Mysql_operation();
 		
@@ -467,7 +462,7 @@ public class Manager_op {
 		}
 		
 		String sql="delete from manager_form where user_number in ("+value+") ;";
-		//System.out.println(sql);
+
 		
 		
 		Mysql_operation mop= new Mysql_operation();
@@ -496,7 +491,7 @@ public class Manager_op {
 		String sql="delete from student where user_number in ("+value+") ;";
 		String sql2="delete from student_basic_news where user_number in ("+value+") ;";
 		String sql3="delete from student_marks where user_number in ("+value+") ;";
-		//System.out.println(sql);
+
 		
 		boolean a;
 		boolean b;

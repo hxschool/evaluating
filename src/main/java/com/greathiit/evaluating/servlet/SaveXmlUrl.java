@@ -65,7 +65,7 @@ public class SaveXmlUrl extends HttpServlet {
 				+ "', '"
 				+ xmlRules
 				+ "', '1');";
-		System.out.println(sql);
+		
 		Mysql_operation optr=new Mysql_operation();
 		optr.sql_opWord(sql);
 		

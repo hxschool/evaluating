@@ -255,7 +255,7 @@ public class Items {
 																						// ，filed_value是标志字段
 	{
 		String sql = "Select " + word + " From " + table + " where " + filed_name + "=\"" + filed_value + "\" ;";
-		System.out.println(sql);
+		
 		DBHelper db = new DBHelper();
 
 		Connection conn = null;

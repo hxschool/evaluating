@@ -98,11 +98,8 @@ public class Mysql_operation {// 添加一个数据库 初始化
 			conn = ConnUtils.getConnection();
 
 			String sql = "update " + table + " set " + update_string + " " + limit + ";";
-			System.out.println("准备修改");
-			System.out.println(sql);
 			stmt = conn.prepareStatement(sql);
 			stmt.executeUpdate(sql);
-			System.out.println("修改成功！");
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
